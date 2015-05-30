@@ -9,13 +9,10 @@ import Controller.MedicamentoController;
 import Controller.PessoaController;
 import Model.Medicamento;
 import Model.Pessoa;
-import java.awt.List;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTable;
 
 /**
  *
