@@ -400,7 +400,7 @@ public class Principal extends javax.swing.JFrame {
             PessoaController pessoaController = new PessoaController();
             pessoaController.inserirPessoa(p);
         } catch (SQLException ex) {
-            Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
     }//GEN-LAST:event_cadastropessoaActionPerformed
 
@@ -411,7 +411,7 @@ public class Principal extends javax.swing.JFrame {
             MedicamentoController medicamentoController = new MedicamentoController();
             medicamentoController.inserirMedicamento(m);
         } catch (SQLException ex) {
-            Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
  // TODO add your handling code here:    }//GEN-LAST:event_cadastrarmedicamentoActionPerformed
