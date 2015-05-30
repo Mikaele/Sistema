@@ -10,6 +10,7 @@ package Model;
  * @author Mikaele
  */
 public class Medicamento {
+
     String codigo, nome;
 
     public Medicamento(String codigo, String nome) {
@@ -32,7 +33,5 @@ public class Medicamento {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
-    
-    
+
 }

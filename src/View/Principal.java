@@ -394,40 +394,40 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_enderecoActionPerformed
 
     private void cadastropessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastropessoaActionPerformed
-    try {
-        //inicializa objeto pessoa com os atributos da tela de cadastro
-        Pessoa p = new Pessoa(nomepessoa.getText(), genero.getSelectedItem().toString(),nascimento.getText(),endereco.getText(), cpf.getText(), cargo.getText());
-        PessoaController pessoaController = new  PessoaController();
-        pessoaController.inserirPessoa(p);
-    } catch (SQLException ex) {
-        Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
-    }        // TODO add your handling code here:
+        try {
+            //inicializa objeto pessoa com os atributos da tela de cadastro
+            Pessoa p = new Pessoa(nomepessoa.getText(), genero.getSelectedItem().toString(), nascimento.getText(), endereco.getText(), cpf.getText(), cargo.getText());
+            PessoaController pessoaController = new PessoaController();
+            pessoaController.inserirPessoa(p);
+        } catch (SQLException ex) {
+            Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_cadastropessoaActionPerformed
 
     private void cadastrarmedicamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cadastrarmedicamentoActionPerformed
- try {
-        //inicializa objeto pessoa com os atributos da tela de cadastro
-        Medicamento m = new Medicamento( codigomedicamento.getText(),nomemedicamento.getText());
-        MedicamentoController medicamentoController = new MedicamentoController();
-        medicamentoController.inserirMedicamento(m);
-    } catch (SQLException ex) {
-        Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        try {
+            //inicializa objeto pessoa com os atributos da tela de cadastro
+            Medicamento m = new Medicamento(codigomedicamento.getText(), nomemedicamento.getText());
+            MedicamentoController medicamentoController = new MedicamentoController();
+            medicamentoController.inserirMedicamento(m);
+        } catch (SQLException ex) {
+            Logger.getLogger(index.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
  // TODO add your handling code here:    }//GEN-LAST:event_cadastrarmedicamentoActionPerformed
 
     private void consultarpessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarpessoaActionPerformed
         try {
-          
-            PessoaController pessoaController = new  PessoaController();
-            Pessoa p =    pessoaController.getPessoaByCPF(cpfconsulta.getText());
-            areapessoa.setText("================Resultado da Busca ================"+
-                                            "\nNome: "+p.getNome()+
-                                            "\nEndereço: "+p.getEndereco()+
-                                            "\nGenero: "+p.getGenero()+
-                                            "\nNascimento: "+p.getNascimento()+
-                                            "\nCargo: "+p.getCargo()
-                                            );
+
+            PessoaController pessoaController = new PessoaController();
+            Pessoa p = pessoaController.getPessoaByCPF(cpfconsulta.getText());
+            areapessoa.setText("================Resultado da Busca ================"
+                    + "\nNome: " + p.getNome()
+                    + "\nEndereço: " + p.getEndereco()
+                    + "\nGenero: " + p.getGenero()
+                    + "\nNascimento: " + p.getNascimento()
+                    + "\nCargo: " + p.getCargo()
+            );
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -436,24 +436,23 @@ public class Principal extends javax.swing.JFrame {
 
     private void listarpessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarpessoaActionPerformed
         try {
-            PessoaController pessoaController = new  PessoaController();
-          ArrayList<Pessoa> lista =  pessoaController.getAll();
-          int linha=0,coluna=0;
+            PessoaController pessoaController = new PessoaController();
+            ArrayList<Pessoa> lista = pessoaController.getAll();
+            int linha = 0, coluna = 0;
             for (Pessoa lista1 : lista) {
                 tablePessoa.setValueAt(lista1.getNome(), linha, coluna);
-                 tablePessoa.setValueAt(lista1.getCpf(), linha, coluna+1);
-                 tablePessoa.setValueAt(lista1.getEndereco(), linha, coluna+2);
-                  tablePessoa.setValueAt(lista1.getGenero(), linha, coluna+3);
-                   tablePessoa.setValueAt(lista1.getCargo(), linha, coluna+4);
-                      linha++;
+                tablePessoa.setValueAt(lista1.getCpf(), linha, coluna + 1);
+                tablePessoa.setValueAt(lista1.getEndereco(), linha, coluna + 2);
+                tablePessoa.setValueAt(lista1.getGenero(), linha, coluna + 3);
+                tablePessoa.setValueAt(lista1.getCargo(), linha, coluna + 4);
+                linha++;
 
             }
-              
-      
+
         } catch (SQLException ex) {
             Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_listarpessoaActionPerformed
 
     /**

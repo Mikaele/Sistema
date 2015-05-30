@@ -17,26 +17,26 @@ import sistema.Util;
  * @author Mikaele
  */
 public class MedicamentoController {
-      public void inserirMedicamento( Medicamento m) throws SQLException {
+
+    public void inserirMedicamento(Medicamento m) throws SQLException {
         try {
-            
+
             Util util = new Util();
-             Connection conexao = util.conecta();
+            Connection conexao = util.conecta();
             String sql = "INSERT INTO medicamento  (nome,codigo) VALUES (?, ?)";
-        	PreparedStatement statement = conexao.prepareStatement(sql);// note que agora criamos um Statement de forma diferente
-			statement.setString(1, m.getNome());
-			statement.setString(2, m.getCodigo());
-			
-			int rowsInserted = statement.executeUpdate(); // Executa a inserção e retorna valor != 0 se inseriu (ID de inserção do banco)
-			if (rowsInserted > 0) {
-				System.out.println("Novo Medicamento inserido com sucesso");
-			}
-        statement.close();
-        conexao.close();
+            PreparedStatement statement = conexao.prepareStatement(sql);// note que agora criamos um Statement de forma diferente
+            statement.setString(1, m.getNome());
+            statement.setString(2, m.getCodigo());
+
+            int rowsInserted = statement.executeUpdate(); // Executa a inserção e retorna valor != 0 se inseriu (ID de inserção do banco)
+            if (rowsInserted > 0) {
+                System.out.println("Novo Medicamento inserido com sucesso");
+            }
+            statement.close();
+            conexao.close();
         } catch (SQLException e) {
-        	System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
-      
-      
+
 }

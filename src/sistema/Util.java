@@ -16,70 +16,70 @@ import java.sql.Statement;
  */
 //Classe para criar tabelas (subistituir nosso terminal)
 public class Util {
-    
-     public Connection conecta() throws SQLException{
-                      Connection conexao = null;
+
+    public Connection conecta() throws SQLException {
+        Connection conexao = null;
 
         String url = "jdbc:mysql://localhost/farmacia";  //Nome da base de dados
         String user = "root"; //nome do usuário do MySQL
         String password = ""; //senha do MySQL
-        try{
+        try {
             conexao = DriverManager.getConnection(url, user, password);
-}catch(SQLException sqlex){
-System.out.println("Erro na conexão "+ sqlex);
-}
+        } catch (SQLException sqlex) {
+            System.out.println("Erro na conexão " + sqlex);
+        }
         return conexao;
     }
 
-    public void desconecta(Connection conexao){
-    try{
-    conexao.close();
-    }catch(SQLException sqlex){
-    System.out.println("Erro na conexão "+ sqlex);
+    public void desconecta(Connection conexao) {
+        try {
+            conexao.close();
+        } catch (SQLException sqlex) {
+            System.out.println("Erro na conexão " + sqlex);
+        }
     }
-    }
-    public void criaTabela(String nomeTabela,String atributos) throws SQLException {
-            Statement statement = null;
-            Connection conexao = null;
+
+    public void criaTabela(String nomeTabela, String atributos) throws SQLException {
+        Statement statement = null;
+        Connection conexao = null;
 
         try {
             conexao = conecta();
             statement = conexao.createStatement();
 
-            String createTableSQL = "CREATE TABLE "+nomeTabela+"("+atributos+");";
+            String createTableSQL = "CREATE TABLE " + nomeTabela + "(" + atributos + ");";
 
-        	System.out.println(createTableSQL);
-                        // executa o comando de criação
-        	statement.execute(createTableSQL);
+            System.out.println(createTableSQL);
+            // executa o comando de criação
+            statement.execute(createTableSQL);
 
-        	System.out.println("Tabela \"nomeTabela\" foi criada com sucesso!");
+            System.out.println("Tabela \"nomeTabela\" foi criada com sucesso!");
 
         } catch (SQLException e) {
 
-        	System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
 
         } finally {   // sempre feche o statement a conexão com banco
 
-        	if (statement != null) {
-        		statement.close();
-        	}
+            if (statement != null) {
+                statement.close();
+            }
 
-        	if (conexao != null) {
-        		conexao.close();
-        	}
+            if (conexao != null) {
+                conexao.close();
+            }
 
         }
 
     }
-    
-    public void criaBanco(String banco) throws SQLException{
-        
-        String sql="CREATE DATABASE "+banco;
-        Connection conxao= conecta();
+
+    public void criaBanco(String banco) throws SQLException {
+
+        String sql = "CREATE DATABASE " + banco;
+        Connection conxao = conecta();
         Statement stmt = conxao.createStatement();
         stmt.execute(sql);
-    
+
     }
 
 }
-
