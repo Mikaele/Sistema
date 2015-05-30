@@ -6,11 +6,14 @@
 package Controller;
 
 import Model.Pessoa;
+import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import sistema.Util;
 
 /**
@@ -24,7 +27,7 @@ public class PessoaController {
             Util util = new Util();
              Connection conexao = util.conecta();
             String sql = "INSERT INTO pessoa (nome, endereco, genero, nascimento ,cpf, cargo) VALUES (?, ?, ?, ?, ?, ?)";
-        	PreparedStatement statement = conexao.prepareStatement(sql);// note que agora criamos um Statement de forma diferente
+            PreparedStatement statement = conexao.prepareStatement(sql);// note que agora criamos um Statement de forma diferente
 			statement.setString(1, p.getNome());
 			statement.setString(2, p.getEndereco());
 			statement.setString(3, p.getGenero());
@@ -42,7 +45,7 @@ public class PessoaController {
         	System.out.println(e.getMessage());
         }
     }
-public void selectPessoa()throws SQLException {
+public ArrayList getAll()throws SQLException {
         try {
             String sql = "SELECT * FROM pessoa";
             
@@ -50,23 +53,20 @@ public void selectPessoa()throws SQLException {
 			Connection conexao = util.conecta();
 			Statement statement = conexao.createStatement();
 			ResultSet result = statement.executeQuery(sql);
+                        ArrayList<Pessoa> lista = new ArrayList<Pessoa>();
 			int count = 0;
 			while (result.next()){
-				String nome = result.getString("nome");
-				String endereco = result.getString("endereco");
-				String genero = result.getString("genero");
-				String nascimento = result.getString("nascimento");
-				String cpf = result.getString("cpf");
-				String cargo = result.getString("cargo");
-				
-				String output = "Pessoa #%d: %s - %s - %s - %s - %s - %s";
-				System.out.println(String.format(output, ++count, nome, endereco, genero, nascimento, cpf, cargo));
+                             Pessoa p = new  Pessoa(result.getString("nome"),  result.getString("genero"), result.getString("nascimento"),result.getString("endereco"),result.getString("cpf"),result.getString("cargo"));// inicializa pessoa
+                            lista.add(p);
+				}
                                 
                                 statement.close();
                                 conexao.close();
-			}
+	        return  lista;
+		
         } catch (SQLException e) {
         	System.out.println(e.getMessage());
+                return null;
         } 
     }
 

@@ -9,9 +9,13 @@ import Controller.MedicamentoController;
 import Controller.PessoaController;
 import Model.Medicamento;
 import Model.Pessoa;
+import java.awt.List;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
@@ -65,6 +69,10 @@ public class Principal extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         areapessoa = new javax.swing.JTextArea();
         consultarpessoa = new javax.swing.JButton();
+        jInternalFrame5 = new javax.swing.JInternalFrame();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablePessoa = new javax.swing.JTable();
+        listarpessoa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -304,6 +312,65 @@ public class Principal extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Consultar Pessoa", jInternalFrame4);
 
+        jInternalFrame5.setVisible(true);
+
+        tablePessoa.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nome", "CPF", "Endereço", "Genero", "Cargo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tablePessoa);
+
+        listarpessoa.setText("Listar");
+        listarpessoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listarpessoaActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jInternalFrame5Layout = new javax.swing.GroupLayout(jInternalFrame5.getContentPane());
+        jInternalFrame5.getContentPane().setLayout(jInternalFrame5Layout);
+        jInternalFrame5Layout.setHorizontalGroup(
+            jInternalFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jInternalFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jInternalFrame5Layout.createSequentialGroup()
+                        .addComponent(listarpessoa)
+                        .addGap(0, 294, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jInternalFrame5Layout.setVerticalGroup(
+            jInternalFrame5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jInternalFrame5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(listarpessoa)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jTabbedPane1.addTab("Listar Pessoa", jInternalFrame5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -367,6 +434,28 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_consultarpessoaActionPerformed
 
+    private void listarpessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listarpessoaActionPerformed
+        try {
+            PessoaController pessoaController = new  PessoaController();
+          ArrayList<Pessoa> lista =  pessoaController.getAll();
+          int linha=0,coluna=0;
+            for (Pessoa lista1 : lista) {
+                tablePessoa.setValueAt(lista1.getNome(), linha, coluna);
+                 tablePessoa.setValueAt(lista1.getCpf(), linha, coluna+1);
+                 tablePessoa.setValueAt(lista1.getEndereco(), linha, coluna+2);
+                  tablePessoa.setValueAt(lista1.getGenero(), linha, coluna+3);
+                   tablePessoa.setValueAt(lista1.getCargo(), linha, coluna+4);
+                      linha++;
+
+            }
+              
+      
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_listarpessoaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -417,6 +506,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JInternalFrame jInternalFrame2;
     private javax.swing.JInternalFrame jInternalFrame3;
     private javax.swing.JInternalFrame jInternalFrame4;
+    private javax.swing.JInternalFrame jInternalFrame5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -427,11 +517,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton limparPessoa;
     private javax.swing.JButton limparmedicamento;
+    private javax.swing.JButton listarpessoa;
     private javax.swing.JTextField nascimento;
     private javax.swing.JTextField nomemedicamento;
     private javax.swing.JTextField nomepessoa;
+    private javax.swing.JTable tablePessoa;
     // End of variables declaration//GEN-END:variables
 }
